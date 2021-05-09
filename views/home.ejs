@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Zoom in Time</title>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="top col-12">
+                <h1>Zoom In Time</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="add-meeting-options col-4">
+                <div class="add-meeting-label">
+                    <h3>Add a New Meeting</h3>
+                </div>
+                <div class="add-meeting-box">
+                    <form action="/" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meeting name" name="meetingName">
+                        </div>
+                        <div class="mb-3">
+                            <input type="date" class="form-control" id="exampleFormControlInput1" name="date">
+                        </div>
+                        <div class="mb-3">
+                            <input type="time" class="form-control" id="exampleFormControlInput1" name="time">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Add meeting link</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="link"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary mb-3">Add Meeting</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="meetings-options col-8">
+                <div class="your-meetings-label">
+                    <h3>Your meetings</h3>
+                </div>
+                <div class="meetings-box">
+                    <% meetingInfo.forEach(function(meeting){ %>
+                    <div class="meeting">
+                        <div class="row">
+                                <div class="meeting-info col-6">
+                                    <h5 class="meeting-name"><%= meeting.meetingName %></h5> 
+                                <p class="meeting-datetime"><%= meeting.date %> <%= meeting.time %></p>
+                                </div>
+                                <div class="attend-btn col-6">
+                                    <form action="/delete" method="post">
+                                        <button class="btn btn-sm btn-danger" type="submit" name="delete" value="<%= meeting._id %>">Delete</button>
+                                    </form>
+                                    <a href="<%= meeting.link %>"><button class="btn btn-primary btn-sm">Attend</button></a>
+                                </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                    <div class="hidden-add-meeting-box">
+                        <form action="/" method="post">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Meeting name" name="meetingName">
+                            </div>
+                            <div class="mb-3">
+                                <label for="MeetingDate">Date</label>
+                                <input type="date" class="form-control" id="MeetingDate" name="date">
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="MeetingTime">Time</label>
+                                <input type="time" class="form-control" id="MeetingTime" name="time">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Add meeting link</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="link"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary mb-3">Add Meeting</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="show-options.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
